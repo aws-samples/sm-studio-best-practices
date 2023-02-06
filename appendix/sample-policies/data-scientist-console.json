@@ -1,0 +1,73 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AmazonSageMakerPresignedUrlPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreatePresignedDomainUrl"
+            ],
+            "Resource": [
+                "arn:aws:sagemaker:<region>:<account-id>:user-profile/*"
+            ]
+        },
+        {
+            "Sid": "AllowRolePerm",
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::<account-id>:role/SageMakerExecRoleMin"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "iam:PassedToService": [
+                        "sagemaker.amazonaws.com"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "ListExecutionRoles",
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListRoles"
+            ],
+            "Resource": [
+                "arn:aws:iam::<account-id>:role/SageMakerExecRoleMin"
+            ]
+        },
+        {
+            "Sid": "StudioReadAccess",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:ListDomains",
+                "sagemaker:ListApps",
+                "sagemaker:DescribeDomain",
+                "sagemaker:DescribeUserProfile",
+                "sagemaker:ListUserProfiles",
+                "sagemaker:GetSagemakerServicecatalogPortfolioStatus"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:Describe*",
+                "logs:GetLogDelivery",
+                "logs:GetLogEvents",
+                "logs:ListLogDeliveries",
+                "logs:PutLogEvents",
+                "logs:PutResourcePolicy",
+                "logs:UpdateLogDelivery"
+            ],
+            "Resource": [
+                "arn:aws:logs:<region>:<account-id>:log-group:/aws/sagemaker/*",
+                "arn:aws:logs:<region>:<account-id>:log-stream:*"
+            ]
+        }
+
+    ]
+}

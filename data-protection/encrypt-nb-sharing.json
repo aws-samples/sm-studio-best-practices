@@ -1,0 +1,19 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "EncryptDomainSharingS3Bucket",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreateDomain",
+                "sagemaker:UpdateDomain"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "Null": {
+                    "sagemaker:DomainSharingOutputKmsKey": "false"
+                }      
+            }
+        }
+    ]
+}

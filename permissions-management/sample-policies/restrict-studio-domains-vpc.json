@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {   "Sid": "LockDownStudioDomain",
+            "Effect": "Deny",
+            "Action": [
+                "sagemaker:CreateDomain"
+            ],
+            "Resource": "*",
+            "Condition": {
+                         "StringNotEquals": {"sagemaker:AppNetworkAccessType": "VpcOnly"
+                },
+                "Null": {
+                        "sagemaker:VpcSubnets": "true",
+                        "sagemaker:VpcSecurityGroupIds": "true"
+                }
+            }
+        }
+    ]
+}

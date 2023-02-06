@@ -1,0 +1,153 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "AppPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreateApp",
+                "sagemaker:DescribeApp"
+                "sagemaker:DeleteApp",
+                "sagemaker:ListApps"
+            ],
+            "Resource": [
+                "arn:aws:sagemaker:<region>:<account-id>:app/*"
+            ]
+        },
+        {
+            "Sid": "AllowPassRole",
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole"
+            ],
+            "Resource": "arn:aws:iam::*:role/*",
+            "Condition": {
+                "StringEquals": {
+                    "iam:PassedToService": "sagemaker.amazonaws.com"
+                }
+            }
+        },
+        {
+            "Sid": "KMSPermissionsForSageMaker",
+            "Effect": "Allow",
+            "Action": [
+                "kms:CreateGrant",
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:ListGrants"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "VPCNetworkPerm",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:CreateNetworkInterface",
+                "ec2:CreateNetworkInterfacePermission",
+                "ec2:DeleteNetworkInterface",
+                "ec2:DeleteNetworkInterfacePermission",
+                "ec2:DescribeDhcpOptions",
+                "ec2:DescribeNetworkInterfaces",
+                "ec2:DescribeRouteTables",
+                "ec2:DescribeSecurityGroups",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeVpcEndpoints",
+                "ec2:DescribeVpcs"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CloudWatchMetrics",
+            "Effect": "Allow",
+            "Action": [
+                "cloudwatch:DeleteAlarms",
+                "cloudwatch:DescribeAlarms",
+                "cloudwatch:GetMetricData",
+                "cloudwatch:GetMetricStatistics",
+                "cloudwatch:ListMetrics",
+                "cloudwatch:PutMetricAlarm",
+                "cloudwatch:PutMetricData"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "CloudWatchLogs",
+            "Effect": "Allow",
+            "Action": [
+                "logs:CreateLogDelivery",
+                "logs:CreateLogGroup",
+                "logs:CreateLogStream",
+                "logs:DeleteLogDelivery",
+                "logs:Describe*",
+                "logs:GetLogDelivery",
+                "logs:GetLogEvents",
+                "logs:ListLogDeliveries",
+                "logs:PutLogEvents",
+                "logs:PutResourcePolicy",
+                "logs:UpdateLogDelivery"
+            ],
+            "Resource": [
+                "arn:aws:logs:<region>:<account-id>:log-group:/aws/sagemaker/*",
+                "arn:aws:logs:<region>:<account-id>:log-stream:*"
+            ]
+        },
+        {
+            "Sid": "BYOCPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "ecr:SetRepositoryPolicy",
+                "ecr:CompleteLayerUpload",
+                "ecr:BatchDeleteImage",
+                "ecr:UploadLayerPart",
+                "ecr:DeleteRepositoryPolicy",
+                "ecr:InitiateLayerUpload",
+                "ecr:DeleteRepository",
+                "ecr:PutImage",
+                "ecr:BatchCheckLayerAvailability",
+                "ecr:BatchGetImage",
+                "ecr:CreateRepository",
+                "ecr:GetAuthorizationToken",
+                "ecr:GetDownloadUrlForLayer",
+                "ecr:StartImageScan",
+                "ecr:Describe*"
+            ],
+            "Resource": [
+                "arn:aws:ecr:*:*:repository/*sagemaker*"
+            ]
+        },
+        {
+            "Sid": "SageMakerPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:AddTags",
+                "sagemaker:CreateAlgorithm",
+                "sagemaker:CreateProcessingJob",
+                "sagemaker:CreateTrainingJob",
+                "sagemaker:CreateTransformJob",
+                "sagemaker:DescribeAlgorithm",
+                "sagemaker:DescribeHyperParameterTuningJob",
+                "sagemaker:DescribeProcessingJob",
+                "sagemaker:DescribeTrainingJob",
+                "sagemaker:DescribeTransformJob",
+                "sagemaker:GetSearchSuggestions",
+                "sagemaker:ListAlgorithms",
+                "sagemaker:ListHyperParameterTuningJobs",
+                "sagemaker:ListProcessingJobs",
+                "sagemaker:ListTags",
+                "sagemaker:ListTrainingJobs",
+                "sagemaker:ListTrainingJobsForHyperParameterTuningJob",
+                "sagemaker:ListTransformJobs",
+                "sagemaker:Search",
+                "sagemaker:StopHyperParameterTuningJob",
+                "sagemaker:StopProcessingJob",
+                "sagemaker:StopTrainingJob",
+                "sagemaker:StopTransformJob",
+                "sagemaker:UpdateTrainingJob"
+            ],
+            "Resource": "*"
+        }
+    ]
+}

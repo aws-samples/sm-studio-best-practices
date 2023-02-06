@@ -1,0 +1,20 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "Encryption",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreateMonitoringSchedule",
+                "sagemaker:UpdateMonitoringSchedule"
+            ],
+            "Resource": "*",
+            "Condition": {
+                "Null": {
+                    "sagemaker:VolumeKmsKey": "false",
+                    "sagemaker:OutputKmsKey": "false"
+                }
+            }
+        }
+    ]
+}

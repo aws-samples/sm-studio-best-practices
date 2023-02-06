@@ -1,0 +1,44 @@
+{
+    "Version": "2012-10-17",
+    "Statement":
+    [
+        {
+            "Sid": "CreateRequireDomainTag",
+            "Effect": "Allow",
+            "Action":
+            [
+                "SageMaker:Create*",
+                "SageMaker:Update*"
+            ],
+            "Resource": "*",
+            "Condition":
+            {
+                "ForAllValues:StringEquals":
+                {
+                    "aws:TagKeys":
+                    [
+                        "sagemaker:domain-arn"
+                    ]
+                }
+            }
+        },
+        {
+            "Sid": "ResourceAccessRequireDomainTag",
+            "Effect": "Allow",
+            "Action":
+            [
+                "SageMaker:Update*",
+                "SageMaker:Delete*",
+                "SageMaker:Describe*"
+            ],
+            "Resource": "*",
+            "Condition":
+            {
+                "StringEquals":
+                {
+                    "aws:ResourceTag/sagemaker:domain-arn": "arn:aws:sagemaker:<REGION>:<ACCOUNT_ID>:domain/<DOMAIN_ID>"
+                }
+            }
+        }
+    ]
+}

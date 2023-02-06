@@ -1,0 +1,18 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "EnforceUserProfileTags",
+            "Effect": "Allow",
+            "Action": "sagemaker:CreateUserProfile",
+            "Resource": "*",
+            "Condition": {
+                "ForAnyValue:StringEquals": {
+                    "aws:TagKeys": [
+                        "studiouserid"
+                    ]
+                }
+            }
+        }
+    ]
+}

@@ -1,0 +1,179 @@
+{
+    "Version": "2012-10-17",
+    "Statement": [
+        {
+            "Sid": "LockDownStudioDomainCreateToVPC",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreateDomain"
+            ],
+            "Resource": [
+                "arn:aws:sagemaker:<region>:<account-id>:domain/*"
+            ],
+            "Condition": {
+                "StringEquals": {
+                    "sagemaker:AppNetworkAccessType": "VpcOnly"
+                }
+            }
+        },
+        {
+            "Sid": "StudioUserProfilePerm",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreateUserProfile"
+            ],
+            "Resource": [
+                "arn:aws:sagemaker:<region>:<account-id>:user-profile/*"
+            ]
+        },
+        {
+            "Sid": "AllowFileSystemPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "elasticfilesystem:CreateFileSystem"
+            ],
+            "Resource": "arn:aws:elasticfilesystem:<region>:<account-id>:file-system/*"
+        },
+        {
+            "Sid": "KMSPermissionsForSageMaker",
+            "Effect": "Allow",
+            "Action": [
+                "kms:CreateGrant",
+                "kms:Decrypt",
+                "kms:DescribeKey",
+                "kms:Encrypt",
+                "kms:GenerateDataKey",
+                "kms:RetireGrant",
+                "kms:ReEncryptTo",
+                "kms:ListGrants",
+                "kms:RevokeGrant",
+                "kms:GenerateDataKeyWithoutPlainText"
+            ],
+            "Resource": [
+                "arn:aws:kms:<region>:<account-id>:key/<key-id>"
+            ]
+        },
+        {
+            "Sid": "AmazonSageMakerPresignedUrlPolicy",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreatePresignedDomainUrl"
+            ],
+            "Resource": [
+                "arn:aws:sagemaker:<region>:<account-id>:user-profile/*"
+            ]
+        },
+        {
+            "Sid": "AllowRolePerm",
+            "Effect": "Allow",
+            "Action": [
+                "iam:PassRole",
+                "iam:GetRole"
+            ],
+            "Resource": [
+                "arn:aws:iam::<account-id>:role/*"
+            ]
+        },
+        {
+            "Sid": "ListExecutionRoles",
+            "Effect": "Allow",
+            "Action": [
+                "iam:ListRoles"
+            ],
+            "Resource": [
+                "arn:aws:iam::<account-id>:role/*"
+            ]
+        },
+        {
+            "Sid": "SageMakerApiListDomain",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:ListDomains"
+            ],
+            "Resource": "arn:aws:sagemaker:<region>:<account-id>:domain/*"
+        },
+        {
+            "Sid": "VpcConfigurationForCreateForms",
+            "Effect": "Allow",
+            "Action": [
+                "ec2:DescribeVpcs",
+                "ec2:DescribeSubnets",
+                "ec2:DescribeSecurityGroups"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "KmsKeysForCreateForms",
+            "Effect": "Allow",
+            "Action": [
+                "kms:DescribeKey",
+                "kms:ListAliases"
+            ],
+            "Resource": [
+                "arn:aws:kms:<region>:<account-id>:key/*"
+            ]
+        },
+        {
+            "Sid": "KmsKeysForCreateForms2",
+            "Effect": "Allow",
+            "Action": [
+                "kms:ListAliases"
+            ],
+            "Resource": [
+                "*"
+            ]
+        },
+        {
+            "Sid": "StudioReadAccess",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:ListDomains",
+                "sagemaker:ListApps",
+                "sagemaker:DescribeDomain",
+                "sagemaker:DescribeUserProfile",
+                "sagemaker:ListUserProfiles",
+                "sagemaker:EnableSagemakerServicecatalogPortfolio",
+                "sagemaker:GetSagemakerServicecatalogPortfolioStatus"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Sid": "SageMakerProjectsSC",
+            "Effect": "Allow",
+            "Action": [
+                "servicecatalog:AcceptPortfolioShare",
+                "servicecatalog:ListAcceptedPortfolioShares",
+                "servicecatalog:Describe*",
+                "servicecatalog:List*",
+                "servicecatalog:ScanProvisionedProducts",
+                "servicecatalog:SearchProducts",
+                "servicecatalog:SearchProvisionedProducts",
+                "cloudformation:GetTemplateSummary",
+                "servicecatalog:ProvisionProduct",
+                "cloudformation:ListStackResources",
+                "servicecatalog:AssociatePrincipalWithPortfolio"
+            ],
+            "Resource": "*"
+        },
+        {
+            "Action": [
+                "s3:CreateBucket",
+                "s3:ListAllMyBuckets",
+                "s3:GetBucketLocation",
+                "s3:GetObject",
+                "s3:PutObject",
+                "s3:DeleteObject",
+                "s3:AbortMultipartUpload",
+                "s3:GetBucketCors",
+                "s3:PutBucketCors",
+                "s3:GetBucketAcl",
+                "s3:PutObjectAcl"
+            ],
+            "Effect": "Allow",
+            "Resource": [
+                "arn:aws:s3:::<s3-bucket>",
+                "arn:aws:s3:::<s3-bucket>/*"
+            ]
+        }
+    ]
+}
