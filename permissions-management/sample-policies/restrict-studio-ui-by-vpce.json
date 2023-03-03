@@ -9,6 +9,7 @@
                 "sagemaker:DescribeUserProfile"
             ],
             "Resource": "*",
+            # update this to your VPC endpoint IDs
             "Condition": {
                 "ForAnyValue:StringEquals": {
                     "aws:sourceVpce": [
