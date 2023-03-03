@@ -9,6 +9,7 @@
                  "sagemaker:DescribeUserProfile"
              ],
              "Resource": "*",
+             # update this to your source IP addresses to allowlist
              "Condition": {
                  "IpAddress": {
                      "aws:SourceIp": [

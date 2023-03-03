@@ -6,7 +6,7 @@
             "Effect": "Allow",
             "Action": [
                 "sagemaker:CreateApp",
-                "sagemaker:DescribeApp"
+                "sagemaker:DescribeApp",
                 "sagemaker:DeleteApp",
                 "sagemaker:ListApps"
             ],
@@ -145,9 +145,27 @@
                 "sagemaker:StopProcessingJob",
                 "sagemaker:StopTrainingJob",
                 "sagemaker:StopTransformJob",
-                "sagemaker:UpdateTrainingJob"
+                "sagemaker:UpdateTrainingJob",
+                "sagemaker:ListEndpoints",
+                "sagemaker:ListEndpointConfigs"
             ],
             "Resource": "*"
+        },
+        {
+            "Sid": "SageMakerEndpointPermissions",
+            "Effect": "Allow",
+            "Action": [
+                "sagemaker:CreateEndpointConfig",
+                "sagemaker:CreateEndpoint",
+                "sagemaker:DeleteEndpointConfig",
+                "sagemaker:DeleteEndpoint",
+                "sagemaker:UpdateEndpoint",
+                "sagemaker:UpdateEndpointWeightsAndCapacities",
+                "sagemaker:DescribeEndpoint",
+                "sagemaker:DescribeEndpointConfig",
+                "sagemaker:InvokeEndpoint"
+            ],
+            "Resource": "arn:aws:sagemaker:*:*:*/*"
         }
     ]
 }
